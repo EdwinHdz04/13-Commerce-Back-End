@@ -17,7 +17,7 @@ Product.init(
       autoIncrement: true 
     },
       product_name:{
-        type: DataTypes.STRINGS,
+        type: DataTypes.STRING,
         allowNull: false
     },
     price:{
@@ -48,7 +48,7 @@ Product.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'product',
+    modelName: 'Product',
   }
 );
 
