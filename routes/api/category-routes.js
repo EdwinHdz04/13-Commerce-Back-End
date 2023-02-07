@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { where } = require('sequelize');
 const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
@@ -49,12 +50,35 @@ router.post('/', async(req, res) => {
 
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
-  const categoryData = await Category.update({
-  })
+  const categoryData = await 
+  Category.update(
+    {
+    category_name: req.body.category_name
+    },
+    {
+      where:{
+        id: req.body.id,
+      },
+    }
+  )
+   .then ((updatedCategory)=> {
+    res.json(updatedCategory);
+   })
+   .catch((err)=> res.json(err));
 });
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
+  Category.destroy({
+    where: {
+      id: req.body.id,
+    },
+  })
+    .then((deletedCategory) => {
+      res.json(deletedCategory);
+    })
+    .catch((err) => res.json(err));
 });
+
 
 module.exports = router;
